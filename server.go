@@ -1,16 +1,33 @@
 package main
 
 import (
+	"fmt"
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	"io"
 	"log"
 	"net/http"
 	"os"
+	"path"
 )
 
+var routes map[string]string
+
+func initialize() {
+	routes = make(map[string]string)
+	routes["1"] = "osstats2013"
+}
+
 func JSONHandler(w http.ResponseWriter, r *http.Request) {
-	filepath := "data/osstats2013.json"
+	// open input file
+
+	w.Header().Set("Content-Type", "application/json")
+	dir, file := path.Split(r.URL.String())
+	fmt.Printf("Path: %v File: %v\n", dir, file)
+
+	filepath := "./data/" + routes[file] + ".json"
+
+	fmt.Printf(filepath)
 
 	fi, err := os.Open(filepath)
 	if err != nil {
@@ -44,8 +61,11 @@ func JSONHandler(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 
+	log.Println("Initializing routes...")
+	initialize()
+
 	r := mux.NewRouter()
-	r.HandleFunc("/api/data/", JSONHandler).Methods("GET")
+	r.HandleFunc("/api/data/{id:[0-9]+}", JSONHandler).Methods("GET")
 
 	log.Println("Starting Server")
 

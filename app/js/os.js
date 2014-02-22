@@ -8,7 +8,7 @@ google.load('visualization', '1.0', {'packages':['corechart']});
 // Get Data
 function getData() {
 
-  $.getJSON( "/api/data/", function(myJson) {
+  $.getJSON( "/api/data/1", function(myJson) {
     console.log( "success" );
 
     // Set a callback to run when the Google Visualization API is loaded.
