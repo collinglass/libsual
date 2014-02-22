@@ -28,3 +28,7 @@ In Go of course.
 ```app/js``` app javascripts
 
 ```app/js/os.js``` for OS pie chart
+
+```app/js/rw.js``` for Reading Week line chart
+
+```app/js/usage.js``` for Usage bar chart
