@@ -17,6 +17,7 @@ func initialize() {
 	routes = make(map[string]string)
 	routes["1"] = "osstats2013"
 	routes["2"] = "readingweek"
+	routes["3"] = "usage"
 }
 
 func JSONHandler(w http.ResponseWriter, r *http.Request) {
@@ -24,7 +25,7 @@ func JSONHandler(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
 	dir, file := path.Split(r.URL.String())
-	fmt.Printf("Path: %v File: %v\n", dir, file)
+	fmt.Println("Path: %v File: %v\n", dir, file)
 
 	filepath := "./data/" + routes[file] + ".json"
 
