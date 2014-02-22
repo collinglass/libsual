@@ -16,6 +16,7 @@ var routes map[string]string
 func initialize() {
 	routes = make(map[string]string)
 	routes["1"] = "osstats2013"
+	routes["2"] = "readingweek"
 }
 
 func JSONHandler(w http.ResponseWriter, r *http.Request) {

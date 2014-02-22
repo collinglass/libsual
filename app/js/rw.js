@@ -8,7 +8,7 @@ google.load('visualization', '1.0', {'packages':['corechart']});
 // Get Data
 function getData() {
 
-  $.getJSON( "/api/data/1", function(myJson) {
+  $.getJSON( "/api/data/2", function(myJson) {
     console.log( "success" );
 
     // Set a callback to run when the Google Visualization API is loaded.
@@ -18,17 +18,15 @@ function getData() {
     // draws it.
     
     function drawChart() {
+      
       // Create the data table.
-      var data = new google.visualization.DataTable();
-      data.addColumn('string', 'Operating System');
-      data.addColumn('number', 'Visits');
-      data.addRows(myJson);
-      // Set chart options
-      var options = {'title':'Usage by OS',
-                     'width':400,
-                     'height':300};
+      var data = google.visualization.arrayToDataTable(myJson);
+
+        var options = {
+          title: 'Usage during October 2013 (Reading Week 13-19)'
+        };
       // Instantiate and draw our chart, passing in some options.
-      var chart = new google.visualization.PieChart(document.getElementById('chart_os'));
+      var chart = new google.visualization.LineChart(document.getElementById('chart_rw'));
       chart.draw(data, options);
     }
   });
